@@ -3,9 +3,11 @@ const router = express.Router();
 
 
 router.get('/', (req, res, next) => {
-    res.send('categories');
+    res.render('categories', {
+        title: 'Categories'
+    });
 });
 
-module.exports = router;/**
- * Created by bpournasr on 10/17/17.
- */
+
+
+module.exports = router;

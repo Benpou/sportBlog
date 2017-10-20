@@ -5,8 +5,16 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/', (req, res, next) => {
-    res.send('Manage');
+router.get('/articles', (req, res, next) => {
+    res.render('manage_articles', {
+        title: 'Manage Articles'
+    });
+});
+
+router.get('/categories', (req, res, next) => {
+    res.render('manage_categories', {
+    title: 'Manage categories'
+    });
 });
 
 
@@ -17,6 +25,16 @@ router.get('/articles/add', (req, res, next) => {
 router.get('/categories/add', (req, res, next) => {
     res.render('add_categories', {title: 'Create Categories'});
 });
+
+router.get('/articles/edit/:id', (req, res, next) => {
+    res.render('edit_article', {title: 'Edit Articles'});
+});
+
+
+router.get('/categories/edit/:id', (req, res, next) => {
+    res.render('edit_category', {title: 'Edit Categories'});
+});
+
 
 
 
