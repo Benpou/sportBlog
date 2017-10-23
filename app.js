@@ -3,7 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const expressValidator = require('express-validator');
+const mongoose = require('mongoose');
 //const flash = require('connect-flash');
+
+
+//Connect mongoose
+mongoose.connect('mongodb://localhost/sportsblog', {useMongoClient: true});
+const db = mongoose.connection;
 
 
 const port = 3000;
