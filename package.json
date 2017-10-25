@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Benpou/sportBlog#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0-alpha.6",
     "connect-flash": "^0.1.1",
     "express": "^4.16.2",
     "express-messages": "^1.0.1",
