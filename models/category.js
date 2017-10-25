@@ -18,3 +18,8 @@ module.exports.getCategories = function(callback, limit){
 }
 
 
+//Add category
+module.exports.addCategory = function (category, callback) {
+    Category.create(category, callback);
+
+}
