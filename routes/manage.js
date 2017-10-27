@@ -36,7 +36,16 @@ router.get('/articles/edit/:id', (req, res, next) => {
 
 
 router.get('/categories/edit/:id', (req, res, next) => {
-    res.render('edit_category', {title: 'Edit Categories'});
+    var userID = req.params.id;
+    Category.getCategoryById(userID, (err, category) => {
+       if (err) {
+           res.sendStatus(400).send(err);
+       }
+       res.render('edit_category', {
+           title: 'Edit Category',
+        category: category
+       });
+    });
 });
 
 

@@ -23,3 +23,13 @@ module.exports.addCategory = function (category, callback) {
     Category.create(category, callback);
 
 }
+
+//Get single category by Id
+module.exports.getCategoryById = function (id, callback) {
+    Category.findById(id, callback);
+}
+
+
+module.exports.updateCategory = function (query, update, {}, callback) {
+    Category.findOneAndUpdate(query,update, {}, callback);
+}
