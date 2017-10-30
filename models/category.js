@@ -33,3 +33,8 @@ module.exports.getCategoryById = function (id, callback) {
 module.exports.updateCategory = function (query, update, {}, callback) {
     Category.findOneAndUpdate(query,update, {}, callback);
 }
+
+//Remove Category
+module.exports.removeCategory = function (query, callback) {
+    Category.remove(query, callback);
+}

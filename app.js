@@ -23,11 +23,12 @@ const manage = require('./routes/manage');
 const categories = require('./routes/categories');
 
 //View Setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
+app.set('view options', { layout: true });
 
 //Set static folder
-app.set(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 //Body parser
@@ -49,8 +50,8 @@ app.use(function (req, res, next) {
 app.use(expressValidator({
     errorFormatter: function (param, msg, value) {
         var namespace = param.split('.')
-            , root = namespace.shift()
-            , formParam = root;
+        , root = namespace.shift()
+        , formParam = root;
 
         while (namespace.length) {
             formParam += '[' + namespace.shift() + ']';
