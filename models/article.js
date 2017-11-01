@@ -17,9 +17,6 @@ const articleSchema = mongoose.Schema({
     author: {
         type: String
     },
-    subtitle: {
-        type: String
-    },
     created_at: {
         type: Date,
         default: Date.now
@@ -41,6 +38,13 @@ const articleSchema = mongoose.Schema({
             type: String
         }
     }]
-
-
 });
+
+const Article = module.exports = mongoose.model('Article', articleSchema);
+
+//Get Article
+module.exports.addArticles = function (article, callback) {
+    Article.create(article, callback);
+}
+
+
