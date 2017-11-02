@@ -2,13 +2,24 @@ const express = require('express');
 const router = express.Router();
 
 Category = require('../models/category');
+Article = require('../models/article');
 
+//GEt Articles
 router.get('/articles', (req, res, next) => {
-    res.render('manage_articles', {
-        title: 'Manage Articles'
+    Article.getArticles((err, articles) => {
+        if (err) {
+            res.send(err);
+        }
+        res.render('manage_articles', {
+        title: 'Manage Articles',
+        articles: articles
+        });
     });
+
 });
 
+
+//Get Categories
 router.get('/categories', (req, res, next) => {
     Category.getCategories((err, categories) => {
         if (err) {
@@ -22,6 +33,7 @@ router.get('/categories', (req, res, next) => {
     });
 });
 
+//Edit category
 router.get('/articles/add', (req, res, next) => {
     Category.getCategories((err, categories) => {
         if (err) {
@@ -33,14 +45,27 @@ router.get('/articles/add', (req, res, next) => {
     });
 });
 
+// Add Category
 router.get('/categories/add', (req, res, next) => {
     res.render('add_categories', {title: 'Create Categories'});
 });
 
+// Edit Article
 router.get('/articles/edit/:id', (req, res, next) => {
-    res.render('edit_article', {title: 'Edit Articles'});
+    var userID = req.params.id;
+
+    Article.getArticleById(userID, (err, article) => {
+        if (err) {
+            res.send(err)
+        }
+        Category.getCategories((err, categories) => {
+            res.render('edit_article',
+            {title: 'Edit Articles', article: article, categories:categories});
+        });
+    });
 });
 
+//Edit Category
 
 router.get('/categories/edit/:id', (req, res, next) => {
     var userID = req.params.id;

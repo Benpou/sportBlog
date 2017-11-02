@@ -1,4 +1,29 @@
 extends layout
 
 block content
-    h1 #{title}
+    .container
+        h1 #{title}
+        form(method='post',action='/articles/edit/'+article._id)
+            .form-group
+                label Title:
+                input.form-control(name='title', type='text', value=article.title)
+            .form-group
+                lable Subtitle:
+                input.form-control(name='subtitle', type='text', value=article.subtitle)
+            .form-group
+                label Category
+                select.form-control(name='category')
+                    each category, i in categories
+                        if(category._id == article.category)
+                            option(value=category._id, selected) #{category.title}
+                        else
+                            option(value=category._id) #{category.title}
+            .form-group
+                lable Author:
+                input.form-control(name='author', type='text', value=article.author)
+            .form-group
+                lable body:
+                textarea.form-control(name='body', type='text') #{article.body}
+            input.btn.btn-primary(type='submit', name='submit', value='save')
+            a.btn.btn-warning(href='/manage/articles') Back
+            a.btn.btn-danger.article-delete.pull-right(href='/manage/articles', data-cat-id=article._id) DELETE
