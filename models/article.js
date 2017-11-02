@@ -42,9 +42,28 @@ const articleSchema = mongoose.Schema({
 
 const Article = module.exports = mongoose.model('Article', articleSchema);
 
-//Get Article
+//Add Article
 module.exports.addArticles = function (article, callback) {
     Article.create(article, callback);
 }
 
+//Get Article
+module.exports.getArticles = function(callback, limit) {
+    Article.find(callback).limit(limit).sort([['title', 'ascending']]);
+}
+
+//Get single article by Id
+module.exports.getArticleById = function (id, callback) {
+    Article.findById(id, callback);
+}
+
+//Update Article
+module.exports.updateArticle = function (query, update, {}, callback) {
+    Article.findOneAndUpdate(query,update, {}, callback)
+}
+
+//Remove Article
+module.exports.removeArticle = function (query, callback) {
+    Article.remove(query, callback);
+}
 
