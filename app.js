@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 //const flash = require('connect-flash');
 
 
+
 //Connect mongoose
 mongoose.connect('mongodb://localhost/sportsblog', {useMongoClient: true});
 const db = mongoose.connection;
@@ -17,6 +18,7 @@ const port = 3000;
 const app = express();
 
 
+
 const index = require('./routes/index');
 const articles = require('./routes/articles');
 const manage = require('./routes/manage');
@@ -25,7 +27,7 @@ const categories = require('./routes/categories');
 //View Setup
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
-app.set('view options', { layout: true });
+app.set('view options', {layout: true});
 
 //Set static folder
 app.use(express.static(path.join(__dirname, '/public')));
@@ -43,23 +45,23 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.locals.moment = require('moment');
+
 
 //Express validator
 //app.use(expressValidator(middlewareOptions));
 
 app.use(expressValidator({
     errorFormatter: function (param, msg, value) {
-        var namespace = param.split('.')
-        , root = namespace.shift()
-        , formParam = root;
+        var namespace = param.split('.') , root = namespace.shift() , formParam = root;
 
         while (namespace.length) {
             formParam += '[' + namespace.shift() + ']';
         }
         return {
-            param : formParam,
-            msg : msg,
-            value : value
+            param: formParam,
+            msg: msg,
+            value: value
         };
     }
 }));
