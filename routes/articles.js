@@ -60,5 +60,18 @@ router.post('/edit/:id', (req, res, next) => {
     });
 });
 
+// Delete Article
+router.delete('/delete/:id', (req, res, next) => {
+    let query = {_id: req.params.id}
+
+    Article.removeArticle(query, (err, article) => {
+        if (err) {
+            res.send(err)
+        }
+        res.redirect('/manage/article')
+    });
+});
 
 module.exports = router;
+
+
