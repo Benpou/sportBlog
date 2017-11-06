@@ -20,7 +20,7 @@ $(document).ready(() => {
 $(document).ready(() => {
     $('.article-delete').on('click', (e) => {
         $target = $(e.target);
-        const id = $target.attr('data-cat-id');
+        const id = $target.attr('data-article-id');
         $.ajax({
             type: 'DELETE',
             url: '/articles/delete/'+id,
