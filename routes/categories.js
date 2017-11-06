@@ -43,19 +43,27 @@ router.post('/add', (req, res, next) => {
 
 //Edit Category - POST
 router.post('/edit/:id', (req, res, next) => {
-    let category = new Category();
-    const query = {_id: req.params.id}
-    const update = {title: req.body.title,
-                    description: req.body.description
-                }
+    req.checkBody('title', 'Title is required').notEmpty();
 
+    let errors = req.validationErrors();
 
-    Category.updateCategory(query, update, {}, (err, category) => {
-        if (err) {
-            res.send(err);
-        }
-        res.redirect('/manage/categories');
-    });
+    if (errors) {
+        res.render('edit_category', {
+            errors: errors,
+            title: 'Edit Category'
+        });
+    } else {
+        let category = new Category();
+        const query = {_id: req.params.id}
+        const update = {title: req.body.title, description: req.body.description}
+
+        Category.updateCategory(query, update, {}, (err, category) => {
+            if (err) {
+                res.send(err);
+            }
+            res.redirect('/manage/categories');
+        });
+    }
 });
 
 
