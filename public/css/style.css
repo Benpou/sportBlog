@@ -20,7 +20,7 @@
     color:white;
 }
 
-#messages .success{
+#messages .error{
     background:red;
     color:white;
 }
